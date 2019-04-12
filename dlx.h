@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 01:23:03 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/11 20:24:06 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/12 13:59:51 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,4 +14,6 @@
 # define DLX_H
 
 #include "qlist.h"
+
+int	ft_dlx(t_qlist *h, int k);
 #endif

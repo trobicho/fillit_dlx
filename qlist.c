@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 01:23:06 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/12 11:11:41 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/12 19:05:43 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		ft_alloc_col(t_qlist *clst, int n_constrain)
 		while (j < n_constrain)
 		{
 			qlst[j].r = NULL;
-			qlst[j].l = &qlst[j];
+			qlst[j].l = NULL;
 			qlst[j].u = (j == 0 ? clst : &qlst[j - 1]);
 			qlst[j].d = (j + 1 == n_constrain ? clst : &qlst[j + 1]);
 			qlst[j].clh = clst;
@@ -70,8 +70,34 @@ t_qlist	*ft_chrnewrow(t_qlist *clst, t_qlist *l, t_qlist *r)
 		row_lst = row_lst->d;
 	if (row_lst == clst)
 		return (NULL);
-	row_lst->l = l;
-	row_lst->r = r;
+	row_lst->l = (l ? l : row_lst);
+	row_lst->r = (r ? r : row_lst);
 	row_lst->l->r = row_lst;
 	return (row_lst);
+}
+
+#include <stdio.h>
+void	printLst(t_qlist *h)
+{
+	t_qlist *c, *i, *j;
+
+	c = h->r;
+	while(c != h)
+	{
+		j = c;
+		printf("(%0x):", c);
+		do
+		{
+			i = j;
+			do
+			{
+				printf("(%0x)->", i->l);
+				i = i->l;
+			}while(i != j);
+			printf("DOWN(%0x)\n", j->d);
+			j = j->d;
+		}while(j != c);
+		printf("------------------\n");
+		c = c->r;
+	}
 }

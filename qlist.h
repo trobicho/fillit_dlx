@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 01:22:56 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/12 11:11:12 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/12 16:45:07 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,6 @@ typedef struct	s_qlist
 t_qlist			*ft_alloc_clst(int nb_col);
 int				ft_alloc_col(t_qlist *clst, int n_constrain);
 t_qlist			*ft_chrnewrow(t_qlist *clist, t_qlist *l, t_qlist *r);
+
+void	printLst(t_qlist *h);
 #endif
