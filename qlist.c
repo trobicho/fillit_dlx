@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 01:23:06 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/12 19:05:43 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/13 17:49:55 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_qlist	*ft_alloc_clst(int nb_col)
 		clst[i].r = &clst[(i + 1) % (nb_col + 1)];
 		clst[i].u = &clst[i];
 		clst[i].d = &clst[i];
-		clst[i].clh = NULL;
+		clst[i].clh = &clst[i];
 		clst[i].name = i - 1;
 		clst[i].size = 0;
 		i++;
