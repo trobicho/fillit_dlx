@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 01:23:06 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/13 17:49:55 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/15 19:35:04 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,41 @@ t_qlist	*ft_chrnewrow(t_qlist *clst, t_qlist *l, t_qlist *r)
 	row_lst->r = (r ? r : row_lst);
 	row_lst->l->r = row_lst;
 	return (row_lst);
+}
+
+t_qlist *ft_get_col(t_qlist *header, int c)
+{
+	int i;
+	t_qlist	*col;
+
+	i = 0;
+	col = header->r;
+	while (i < c && col->r != header)
+	{
+		col = col->r;
+		i++;
+	}
+	return (col);
+}
+
+void	ft_add_tocol(t_qlist *header, t_qlist *elem, int c)
+{
+	int i;
+	t_qlist	*col;
+
+	i = 0;
+	col = header->r;
+	while (i < c && col->r != header)
+	{
+		col = col->r;
+		i++;
+	}
+	elem->clh = col;
+	elem->u = col->u;
+	col->u->d = elem;
+	col->u = elem;
+	elem->name = -2;
+	elem->d = col;
 }
 
 #include <stdio.h>

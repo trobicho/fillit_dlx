@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 01:23:01 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/13 13:49:21 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/15 20:22:57 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "fifo.h"
 
 static int maxk = -1;
+static int nb_sol = 0;
 
 static void	ft_cover(t_qlist *c)
 {
@@ -56,6 +57,11 @@ static void	ft_uncover(t_qlist *c)
 	c->l->r = c;
 }
 
+void print_nb_sol()
+{
+	printf("nb_sol = %d\n", nb_sol);
+}
+
 int			ft_dlx(t_qlist *h, int k, int stopsol, void (*p_sol)(t_fifo *))
 {
 	t_qlist			*col;
@@ -68,7 +74,8 @@ int			ft_dlx(t_qlist *h, int k, int stopsol, void (*p_sol)(t_fifo *))
 		return (-1);
 	if (h->r == h)
 	{
-		p_sol(fifo);
+		//p_sol(fifo);
+		nb_sol++;
 		return (1);
 	}
 	col = h->r;

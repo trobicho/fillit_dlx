@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:17:47 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/15 11:11:20 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/15 20:21:52 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-static int n_sol = 0;
 void	p_sol(t_fifo *fifo)
 {
 	t_qlist *list;
@@ -149,7 +148,7 @@ int	main(int ac, char **av)
 	t_qlist *qlist = ft_alloc_matrix(matrix, 40, 83, 36);
 	if (qlist == NULL)
 		return (-1);
-	ft_dlx(qlist, 0, 1, &p_sol);
+	ft_dlx(qlist, 0, 0, &p_sol);
 	printf("nb soluce: %d", n_sol);
 	return (0);
 }

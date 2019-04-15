@@ -6,13 +6,13 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 20:11:30 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/13 19:22:26 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/15 17:48:27 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <string.h>
 #include "qlist.h"
 
-static void		ft_relink_secondary(t_qlist *clst, int w, int nb_second)
+void		ft_relink_secondary(t_qlist *clst, int nb_primary)
 {
 	t_qlist	*lst;
 	t_qlist	*lst_r;
@@ -20,21 +20,16 @@ static void		ft_relink_secondary(t_qlist *clst, int w, int nb_second)
 
 	lst = clst->r;
 	h = 0;
-	while (h < w - nb_second)
-	{
+	while (h++ < nb_primary)
 		lst = lst->r;
-		h++;
-	}
-	lst = lst->r;
 	lst->l->r = clst;
 	clst->l = lst->l;
-	while (++h < w)
+	while (lst != clst)
 	{
 		lst_r = lst->r;
 		lst->r = lst;
 		lst->l = lst;
 		lst = lst_r;
-		h++;
 	}
 }
 
@@ -100,6 +95,6 @@ t_qlist			*ft_alloc_matrix(char **m, size_t w, size_t h, int nb_second)
 	if ((ft_linkit(clst, m, w, h)) == -1)
 		return (NULL);
 	if (nb_second > 0)
-		ft_relink_secondary(clst, w, nb_second);
+		ft_relink_secondary(clst, w - nb_second);
 	return (clst);
 }
