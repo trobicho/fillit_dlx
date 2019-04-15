@@ -1,7 +1,7 @@
 CC = gcc
 #CFLAGS = -Wall -Wextra -Werror
 CFLAGS = -g
-SRCS = main.c dlx.c fifo.c matrix_create.c qlist.c
+SRCS = fillitTest.c dlx.c fifo.c matrix_create.c qlist.c
 HDRS = dlx.h fifo.h matrix_create.h qlist.h
 OUTS = $(SRCS:.c=.o)
 NAME = dlxTest

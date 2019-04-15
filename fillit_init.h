@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_create.h                                    :+:      :+:    :+:   */
+/*   fillit_init.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/11 20:11:28 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/14 12:24:21 by trobicho         ###   ########.fr       */
+/*   Created: 2019/04/14 22:08:28 by trobicho          #+#    #+#             */
+/*   Updated: 2019/04/14 22:28:29 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATRIX_CREATE_H
-# define MATRIX_CREATE_H
+#ifndef FILLIT_INIT_H
+#define FILLIT_INIT_H
 
-#include <string.h>
-#include "qlist.h"
-
-t_qlist	*ft_alloc_matrix(char **m, size_t w, size_t h, int nb_second);
+typedef struct	s_fill_info
+{
+	int	min;
+	int	max;
+	int	nb_piece;
+}				t_fill_info
 #endif

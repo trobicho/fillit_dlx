@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_create.h                                    :+:      :+:    :+:   */
+/*   fillit_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/11 20:11:28 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/14 12:24:21 by trobicho         ###   ########.fr       */
+/*   Created: 2019/04/14 22:09:04 by trobicho          #+#    #+#             */
+/*   Updated: 2019/04/14 22:28:33 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATRIX_CREATE_H
-# define MATRIX_CREATE_H
-
-#include <string.h>
 #include "qlist.h"
 
-t_qlist	*ft_alloc_matrix(char **m, size_t w, size_t h, int nb_second);
-#endif
+t_qlist	*fillit_init(int nb_piece, int min, int max)
+{
+	t_qlist *list = ft_alloc_clst(nb_piece + max*max);
+}
