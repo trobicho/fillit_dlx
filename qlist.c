@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 01:23:06 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/15 19:35:04 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/16 13:03:15 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,10 @@ void	ft_add_tocol(t_qlist *header, t_qlist *elem, int c)
 	t_qlist	*col;
 
 	i = 0;
-	col = header->r;
+	if (c >= 0)
+		col = header->r;
+	else
+		col = header;
 	while (i < c && col->r != header)
 	{
 		col = col->r;

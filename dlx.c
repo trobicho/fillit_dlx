@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 01:23:01 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/15 20:22:57 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/16 19:48:35 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int			ft_dlx(t_qlist *h, int k, int stopsol, void (*p_sol)(t_fifo *))
 		return (-1);
 	if (h->r == h)
 	{
-		//p_sol(fifo);
+		p_sol(fifo);
 		nb_sol++;
 		return (1);
 	}
@@ -83,10 +83,10 @@ int			ft_dlx(t_qlist *h, int k, int stopsol, void (*p_sol)(t_fifo *))
 	row = col;
 	if (k > maxk)
 	{
-		printf("deep = %d\n", k);
 		maxk = k;
 	}
-	while ((row = row->d) != col)
+	r = 0;
+	while ((stopsol && r == 0) && (row = row->d) != col)
 	{
 		//Ok <- row pour disp soluce
 		if (ft_fifo_push(fifo, row, k) == -1)
@@ -98,7 +98,7 @@ int			ft_dlx(t_qlist *h, int k, int stopsol, void (*p_sol)(t_fifo *))
 			//printLst(h);
 			ft_cover(col_j->clh);
 		}
-		if ((r = ft_dlx(h, k + 1, stopsol, p_sol)) == -1 || (r && stopsol))
+		if ((r = ft_dlx(h, k + 1, stopsol, p_sol)) == -1) /// no return pour free
 			return (r);
 		while ((col_j = col_j->l) != row)
 		{
@@ -108,5 +108,6 @@ int			ft_dlx(t_qlist *h, int k, int stopsol, void (*p_sol)(t_fifo *))
 	}
 	//printf("uncover c: %d\n", k);
 	ft_uncover(col);
-	return (0);
+	ft_fifo_push(fifo, NULL, k);
+	return (r);
 }
