@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 11:48:43 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/19 17:39:25 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/19 19:11:20 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 static void	p_tab(char *tab, int w, int h)
 {
-	int i; 
+	int i;
 	int	j;
 
 	i = 0;
@@ -57,9 +57,9 @@ static void	put_intab(t_fill_info *info, char *tab, int w)
 
 void		p_sol(t_fill_info *info)
 {
-	int i; 
-	int w;
-	char *tab; 
+	int		i;
+	int		w;
+	char	*tab;
 
 	w = info->min + info->lst->name;
 	if ((tab = (char *)malloc(sizeof(char) * w * w)) == NULL)

@@ -6,15 +6,15 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 22:08:28 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/19 17:13:04 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/19 19:44:05 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLIT_INIT_H
-#define FILLIT_INIT_H
+# define FILLIT_INIT_H
 
-#include "qlist.h"
-#include "fifo.h"
+# include "qlist.h"
+# include "fifo.h"
 
 typedef struct	s_fill_info
 {
@@ -32,7 +32,7 @@ typedef struct	s_point
 }				t_point;
 
 int				fillit_alloc_piece(t_fill_info *info, t_point *piece, int len
-									, int p);
+	, int p);
 t_point			*fillit_init_info(int nb_piece, int piece_lenmax
-									,t_fill_info *info, int alloc);
+	, t_fill_info *info, int alloc);
 #endif

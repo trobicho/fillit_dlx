@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 13:10:36 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/19 17:30:15 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/19 19:38:45 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int			ft_mega_dlx(t_fill_info *info, void (*p_sol)(t_fill_info *))
 	info->lst->name = 0;
 	while ((r = ft_dlx(info, 0, p_sol)) == 0)
 	{
-		printf("test\n");
 		if (r == -1)
 			return (-1);
 		info->lst->name++;
