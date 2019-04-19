@@ -1,10 +1,10 @@
 CC = gcc
-#CFLAGS = -Wall -Wextra -Werror
-CFLAGS = -g
+CFLAGS = -Wall -Wextra -Werror
+#CFLAGS = -g
 SRCS = main.c parser.c display.c mega_dlx.c fillit_init.c dlx.c fifo.c matrix_create.c qlist.c freeit.c
 HDRS = parser.c display.h mega_dlx.h dlx.h fillit_init.h fifo.h matrix_create.h qlist.h freeit.h
 OUTS = $(SRCS:.c=.o)
-NAME = dlxTest
+NAME = fillit
 
 all: $(NAME)
 
