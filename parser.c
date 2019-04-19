@@ -80,7 +80,7 @@ static int	valid_form(char *buf)
 				t.j++;
 			if (t.i > 1 && buf[t.i - 1] == '#')
 				t.j++;
-			if (t.i >= 6 && buf[t.i - 5] == '#')
+			if (t.i >= 5 && buf[t.i - 5] == '#')
 				t.j++;
 		}
 		t.i++;
@@ -107,7 +107,6 @@ int	check_tetriminos(int fd)
 	{
 		if ((nb_line(t.buf) + nb_sigle(t.buf)) == 2)
 		{
-			// printf("%s", t.buf);
 			if (t.ret != 21 && !(t.ret == 20))
 			{
 				printf("%s\n", "Invalid tetriminos's lenght : abort");
