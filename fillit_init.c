@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 22:09:04 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/19 19:28:22 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/19 20:58:32 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_point			*fillit_init_info(int nb_piece, int piece_lenmax
 	, t_fill_info *info, int alloc)
 {
 	info->min = sqrt_exess(nb_piece * piece_lenmax);
-	info->max = info->min+2;
+	info->max = info->min + 2;
 	info->nb_piece = nb_piece;
 	info->fifo = NULL;
 	if (alloc)
@@ -72,55 +72,69 @@ static t_point	size_center_piece(t_point *piece, int len)
 	return (size);
 }
 
+static t_qlist	*fillit_alloc_inter(t_fill_info *info, t_curp cp, t_qlist *row
+	, t_point *piece)
+{
+	int	k;
+	int	col;
+	int	min;
+
+	min = info->min;
+	if (cp.i >= info->min - cp.size.y || cp.j >= info->min - cp.size.x)
+	{
+		ft_add_tocol(info->lst, &row[0], -1);
+		row[0].name = ((cp.i - (min - cp.size.y)) > (cp.j - (min - cp.size.x))
+				? cp.i - (min - cp.size.y) + 1 : cp.j - (min - cp.size.x) + 1);
+		row[0].r = &row[1];
+		row[0].l = row;
+		row = &row[1];
+	}
+	k = 0;
+	ft_add_tocol(info->lst, &row[0], cp.p);
+	while (k < cp.len)
+	{
+		col = info->nb_piece
+			+ info->max * (cp.i + piece[k].y) + cp.j + piece[k].x;
+		ft_add_tocol(info->lst, &row[k + 1], col);
+		row[k + 1].l = &row[k];
+		row[k].r = &row[k + 1];
+		k++;
+	}
+	row[k].r = &row[0];
+	row[0].l = &row[k];
+	row = &row[cp.len + 1];
+	return (row);
+}
+
 int				fillit_alloc_piece(t_fill_info *info, t_point *piece, int len
 	, int p)
 {
-	int		i;
-	int		j;
-	int		k;
-	int		col;
 	int		nb_hidden;
-	t_point	size;
-	t_qlist *row;
+	t_qlist	*row;
+	t_curp	cp;
 
-	size = size_center_piece(piece, len);
-	if ((info->min - size.x) * (info->min - size.y) <= 0)
-		info->min = size.x > size.y ? size.x + 1 : size.y + 1;
-	nb_hidden = (info->max - size.x) * (info->max - size.y) - (info->min - size.x) * (info->min - size.y);
-	row = (t_qlist*)malloc(sizeof(t_qlist) * ((len + 1) * ((info->max - size.x) * (info->max - size.y)) + nb_hidden));
-	nb_hidden = 0;
+	cp.size = size_center_piece(piece, len);
+	if ((info->min - cp.size.x) * (info->min - cp.size.y) <= 0)
+		info->min = cp.size.x > cp.size.y ? cp.size.x + 1 : cp.size.y + 1;
+	nb_hidden = (info->max - cp.size.x) * (info->max - cp.size.y)
+		- (info->min - cp.size.x) * (info->min - cp.size.y);
+	row = (t_qlist*)malloc(sizeof(t_qlist) * ((len + 1)
+				* ((info->max - cp.size.x) * (info->max - cp.size.y))
+					+ nb_hidden));
 	if (row == NULL)
 		return (-1);
-	i = 0;
-	while (i < info->max - size.y)
+	cp.i = 0;
+	cp.p = p;
+	cp.len = len;
+	while (cp.i < info->max - cp.size.y)
 	{
-		j = 0;
-		while (j < info->max - size.x)
+		cp.j = 0;
+		while (cp.j < info->max - cp.size.x)
 		{
-			if (i >= info->min - size.y || j >= info->min - size.x)
-			{
-				ft_add_tocol(info->lst, &row[0], -1);
-				row[0].name = ((i - (info->min - size.y)) > (j - (info->min - size.x)) ? i - (info->min - size.y) + 1 : j - (info->min - size.x) + 1);
-				row[0].r = &row[1];
-				row[0].l = row;
-				row = &row[1];
-			}
-			k = 0;
-			ft_add_tocol(info->lst, &row[0], p);
-			while (k < len)
-			{
-				col = info->nb_piece + info->max * (i + piece[k].y) + j + piece[k].x;
-				ft_add_tocol(info->lst, &row[k + 1], col);
-				row[k + 1].l = &row[k];
-				row[k].r = &row[k + 1];
-				k++;
-			}
-			row[k].r = &row[0];
-			row[0].l = &row[k];
-			row = &row[len + 1];
-			j++;
+			row = fillit_alloc_inter(info, cp, row, piece);
+			cp.j++;
 		}
-		i++;
+		cp.i++;
 	}
 	return (1);
 }

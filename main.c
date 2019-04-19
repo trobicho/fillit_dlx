@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 14:19:01 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/19 19:40:11 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/19 21:07:30 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,25 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-int	main(int ac, char **av)
+static int	lunch_it(int fd, int nb_piece)
+{
+	t_fill_info	info;
+
+	fillit_init_info(nb_piece, 4, &info, 0);
+	if (!(info.lst = ft_alloc_clst(nb_piece + info.max * info.max)))
+		return (-1);
+	get_tetriminos(fd, &info);
+	close(fd);
+	ft_relink_secondary(info.lst, nb_piece);
+	ft_mega_dlx(&info, &p_sol);
+	freeit(info.lst);
+	return (0);
+}
+
+int			main(int ac, char **av)
 {
 	int			fd;
 	int			nb_piece;
-	t_fill_info	info;
 
 	if (ac != 2)
 		ft_putendl_fd("usage: fillit file", 1);
@@ -43,14 +57,7 @@ int	main(int ac, char **av)
 		if (nb_piece)
 		{
 			fd = open(av[1], O_RDONLY);
-			fillit_init_info(nb_piece, 4, &info, 0);
-			if (!(info.lst = ft_alloc_clst(nb_piece + info.max * info.max)))
-				return (-1);
-			get_tetriminos(fd, &info);
-			ft_relink_secondary(info.lst, nb_piece);
-			ft_mega_dlx(&info, &p_sol);
-			freeit(info.lst);
-			close(fd);
+			return (lunch_it(fd, nb_piece) == -1);
 		}
 		else
 		{

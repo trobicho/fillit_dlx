@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 22:08:28 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/19 19:44:05 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/19 20:47:54 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,15 @@ typedef struct	s_point
 	int	x;
 	int	y;
 }				t_point;
+
+typedef struct	s_curp
+{
+	int		i;
+	int		j;
+	int		p;
+	int		len;
+	t_point	size;
+}				t_curp;
 
 int				fillit_alloc_piece(t_fill_info *info, t_point *piece, int len
 	, int p);
