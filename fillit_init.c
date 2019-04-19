@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 22:09:04 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/19 19:03:39 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/19 19:28:22 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static int		sqrt_exess(int n)
 	return (r + 1);
 }
 
-t_point			*fillit_init_info(int nb_piece, int piece_lenmax,
-							t_fill_info *info, int alloc)
+t_point			*fillit_init_info(int nb_piece, int piece_lenmax
+	, t_fill_info *info, int alloc)
 {
 	info->min = sqrt_exess(nb_piece * piece_lenmax);
 	info->max = info->min+2;
@@ -72,7 +72,8 @@ static t_point	size_center_piece(t_point *piece, int len)
 	return (size);
 }
 
-int				fillit_alloc_piece(t_fill_info *info, t_point *piece, int len, int p)
+int				fillit_alloc_piece(t_fill_info *info, t_point *piece, int len
+	, int p)
 {
 	int		i;
 	int		j;

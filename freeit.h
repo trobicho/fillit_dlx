@@ -6,13 +6,14 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 02:52:42 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/19 02:56:50 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/19 19:43:06 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FREEIT_H
 # define FREEIT_H
-#include "qlist.h"
+
+# include "qlist.h"
 
 void	freeit(t_qlist *h);
 #endif

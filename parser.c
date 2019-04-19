@@ -6,7 +6,7 @@
 /*   By: tefourge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 21:35:06 by tefourge          #+#    #+#             */
-/*   Updated: 2019/04/19 19:06:29 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/19 19:49:29 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,8 @@ int			get_tetriminos(int fd, t_fill_info *info)
 			t.i++;
 		}
 		if (t.j == 4 && fillit_alloc_piece(info, point, 4, t.x) == -1)
-			return (1);
-		else
+			return (0);
+		else if (t.j != 4)
 			return (0);
 		t.x++;
 	}

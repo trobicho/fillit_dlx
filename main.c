@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 14:19:01 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/19 17:18:58 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/19 19:40:11 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ int	main(int ac, char **av)
 			nb_piece = check_tetriminos(fd);
 		else
 			return (-1);
-		printf("%d\n", nb_piece);
-		printf("--------------\n");
 		close(fd);
 		if (nb_piece)
 		{
