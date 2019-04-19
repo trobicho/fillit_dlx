@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 22:09:04 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/19 17:12:43 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/19 19:03:39 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int				fillit_alloc_piece(t_fill_info *info, t_point *piece, int len, int p)
 	t_qlist *row;
 
 	size = size_center_piece(piece, len);
+	if ((info->min - size.x) * (info->min - size.y) <= 0)
+		info->min = size.x > size.y ? size.x + 1 : size.y + 1;
 	nb_hidden = (info->max - size.x) * (info->max - size.y) - (info->min - size.x) * (info->min - size.y);
 	row = (t_qlist*)malloc(sizeof(t_qlist) * ((len + 1) * ((info->max - size.x) * (info->max - size.y)) + nb_hidden));
 	nb_hidden = 0;
