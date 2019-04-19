@@ -6,16 +6,13 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 01:23:01 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/16 19:48:35 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/19 15:23:27 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "qlist.h"
 #include "fifo.h"
-
-static int maxk = -1;
-static int nb_sol = 0;
+#include <string.h>
 
 static void	ft_cover(t_qlist *c)
 {
@@ -57,11 +54,6 @@ static void	ft_uncover(t_qlist *c)
 	c->l->r = c;
 }
 
-void print_nb_sol()
-{
-	printf("nb_sol = %d\n", nb_sol);
-}
-
 int			ft_dlx(t_qlist *h, int k, int stopsol, void (*p_sol)(t_fifo *))
 {
 	t_qlist			*col;
@@ -75,38 +67,24 @@ int			ft_dlx(t_qlist *h, int k, int stopsol, void (*p_sol)(t_fifo *))
 	if (h->r == h)
 	{
 		p_sol(fifo);
-		nb_sol++;
 		return (1);
 	}
 	col = h->r;
 	ft_cover(col);
 	row = col;
-	if (k > maxk)
-	{
-		maxk = k;
-	}
 	r = 0;
 	while ((stopsol && r == 0) && (row = row->d) != col)
 	{
-		//Ok <- row pour disp soluce
 		if (ft_fifo_push(fifo, row, k) == -1)
 			return (-1);
 		col_j = row;
 		while ((col_j = col_j->r) != row)
-		{
-			//printf("cover j: %d\n", k);
-			//printLst(h);
 			ft_cover(col_j->clh);
-		}
-		if ((r = ft_dlx(h, k + 1, stopsol, p_sol)) == -1) /// no return pour free
+		if ((r = ft_dlx(h, k + 1, stopsol, p_sol)) == -1)
 			return (r);
 		while ((col_j = col_j->l) != row)
-		{
-			//printf("uncover j: %d\n", k);
 			ft_uncover(col_j->clh);
-		}
 	}
-	//printf("uncover c: %d\n", k);
 	ft_uncover(col);
 	ft_fifo_push(fifo, NULL, k);
 	return (r);

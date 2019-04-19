@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 11:58:05 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/13 13:29:38 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/19 02:14:41 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 t_fifo	*ft_fifo_new(t_qlist *lst, t_fifo *next)
 {
 	t_fifo *fifo;
+
 	if ((fifo = malloc(sizeof(t_fifo))) == NULL)
 		return (NULL);
 	fifo->lst = lst;

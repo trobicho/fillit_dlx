@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 22:09:04 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/16 21:34:51 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/19 15:13:51 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,48 @@
 #include "qlist.h"
 #include <stdlib.h>
 
-t_point		*fillit_init_info(int nb_piece, int piece_lenmax, 
-							t_fill_info *info)
+t_point			*fillit_init_info(int nb_piece, int piece_lenmax,
+							t_fill_info *info, int alloc)
 {
-	info->min = 10;
-	info->max = info->min + 2;
+	info->min = 8;
+	info->max = info->min+2;
 	info->nb_piece = nb_piece;
-	return ((t_point *)malloc(sizeof(t_point) * piece_lenmax));
+	if (alloc)
+		return ((t_point *)malloc(sizeof(t_point) * piece_lenmax));
+	else
+		return (NULL);
 }
 
-int			fillit_alloc_piece(t_fill_info *info, t_point *piece, int len, int p)
+static t_point	size_center_piece(t_point *piece, int len)
+{
+	int		i;
+	t_point	size;
+	t_point	size_min;
+
+	size_min.x = piece[0].x;
+	size_min.y = piece[0].y;
+	size.x = 0;
+	size.y = 0;
+	i = -1;
+	while (++i < len)
+	{
+		size_min.x = (size_min.x > piece[i].x ? piece[i].x : size_min.x);
+		size_min.y = (size_min.y > piece[i].y ? piece[i].y : size_min.y);
+		size.x = (size.x < piece[i].x ? piece[i].x : size.x);
+		size.y = (size.y < piece[i].y ? piece[i].y : size.y);
+	}
+	size.x -= size_min.x;
+	size.y -= size_min.y;
+	i = -1;
+	while (++i < len)
+	{
+		piece[i].x -= size_min.x;
+		piece[i].y -= size_min.y;
+	}
+	return (size);
+}
+
+int				fillit_alloc_piece(t_fill_info *info, t_point *piece, int len, int p)
 {
 	int		i;
 	int		j;
@@ -33,17 +65,7 @@ int			fillit_alloc_piece(t_fill_info *info, t_point *piece, int len, int p)
 	t_point	size;
 	t_qlist *row;
 
-	size.x = 0;
-	size.y = 0;
-	i = 0;
-	while (i < len)
-	{
-		if (size.x < piece[i].x)
-			size.x = piece[i].x;
-		if (size.y < piece[i].y)
-			size.y = piece[i].y;
-		i++;
-	}
+	size = size_center_piece(piece, len);
 	nb_hidden = (info->max - size.x) * (info->max - size.y) - (info->min - size.x) * (info->min - size.y);
 	row = (t_qlist*)malloc(sizeof(t_qlist) * ((len + 1) * ((info->max - size.x) * (info->max - size.y)) + nb_hidden));
 	nb_hidden = 0;

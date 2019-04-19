@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 01:23:06 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/16 13:03:15 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/19 02:06:56 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_qlist	*ft_alloc_clst(int nb_col)
 	if ((clst = malloc(sizeof(t_qlist) * (nb_col + 1))) == NULL)
 		return (NULL);
 	i = 0;
-	while(i < nb_col + 1)
+	while (i < nb_col + 1)
 	{
 		clst[i].l = &clst[(i == 0 ? nb_col : i - 1)];
 		clst[i].r = &clst[(i + 1) % (nb_col + 1)];
@@ -40,7 +40,7 @@ int		ft_alloc_col(t_qlist *clst, int n_constrain)
 {
 	int		j;
 	t_qlist	*qlst;
-	
+
 	if (n_constrain)
 	{
 		if ((qlst = malloc(sizeof(t_qlist) * n_constrain)) == NULL)
@@ -76,9 +76,9 @@ t_qlist	*ft_chrnewrow(t_qlist *clst, t_qlist *l, t_qlist *r)
 	return (row_lst);
 }
 
-t_qlist *ft_get_col(t_qlist *header, int c)
+t_qlist	*ft_get_col(t_qlist *header, int c)
 {
-	int i;
+	int		i;
 	t_qlist	*col;
 
 	i = 0;
@@ -93,7 +93,7 @@ t_qlist *ft_get_col(t_qlist *header, int c)
 
 void	ft_add_tocol(t_qlist *header, t_qlist *elem, int c)
 {
-	int i;
+	int		i;
 	t_qlist	*col;
 
 	i = 0;
@@ -112,30 +112,4 @@ void	ft_add_tocol(t_qlist *header, t_qlist *elem, int c)
 	col->u = elem;
 	elem->name = -2;
 	elem->d = col;
-}
-
-#include <stdio.h>
-void	printLst(t_qlist *h)
-{
-	t_qlist *c, *i, *j;
-
-	c = h->r;
-	while(c != h)
-	{
-		j = c;
-		printf("(%0x):", c);
-		do
-		{
-			i = j;
-			do
-			{
-				printf("(%0x)->", i->l);
-				i = i->l;
-			}while(i != j);
-			printf("DOWN(%0x)\n", j->d);
-			j = j->d;
-		}while(j != c);
-		printf("------------------\n");
-		c = c->r;
-	}
 }
