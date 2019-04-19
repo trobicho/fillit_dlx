@@ -6,14 +6,14 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 11:48:43 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/19 17:39:25 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/19 16:47:09 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "fillit_init.h"
+#include "fifo.h"
 
 static void	p_tab(char *tab, int w, int h)
 {
@@ -30,14 +30,12 @@ static void	p_tab(char *tab, int w, int h)
 	}
 }
 
-static void	put_intab(t_fill_info *info, char *tab, int w)
+static void	put_intab(t_fifo *fifo, char *tab, int nb_piece, int w, int h)
 {
 	char	name;
 	int		name_h;
 	t_qlist	*list;
-	t_fifo	*fifo;
 
-	fifo = info->fifo;
 	while (fifo != NULL)
 	{
 		if (fifo->lst != NULL)
@@ -46,8 +44,8 @@ static void	put_intab(t_fill_info *info, char *tab, int w)
 			list = fifo->lst->r;
 			while (list != fifo->lst)
 			{
-				name_h = list->clh->name - info->nb_piece;
-				tab[(name_h / info->max) * w + name_h % info->max] = name;
+				name_h = list->clh->name - nb_piece;
+				tab[(name_h / h) * w + name_h % w] = name;
 				list = list->r;
 			}
 		}
@@ -55,20 +53,19 @@ static void	put_intab(t_fill_info *info, char *tab, int w)
 	}
 }
 
-void		p_sol(t_fill_info *info)
+void		p_sol(t_fifo *fifo)
 {
 	int i; 
-	int w;
+	int w = 10, h = 10, nb_piece = 13;
 	char *tab; 
 
-	w = info->min + info->lst->name;
-	if ((tab = (char *)malloc(sizeof(char) * w * w)) == NULL)
+	if ((tab = (char *)malloc(sizeof(char) * w * h)) == NULL)
 		return ;
 	i = 0;
-	while (i < w * w)
+	while (i < w * h)
 		tab[i++] = '.';
-	put_intab(info, tab, w);
-	p_tab(tab, w, w);
+	put_intab(fifo, tab, nb_piece, w, h);
+	p_tab(tab, w, h);
 	i = 0;
 	free(tab);
 }

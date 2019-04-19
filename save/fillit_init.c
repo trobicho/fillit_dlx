@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 22:09:04 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/19 17:12:43 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/19 16:57:09 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_point			*fillit_init_info(int nb_piece, int piece_lenmax,
 	info->min = sqrt_exess(nb_piece * piece_lenmax);
 	info->max = info->min+2;
 	info->nb_piece = nb_piece;
-	info->fifo = NULL;
 	if (alloc)
 		return ((t_point *)malloc(sizeof(t_point) * piece_lenmax));
 	else

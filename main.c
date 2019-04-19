@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 14:19:01 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/19 15:20:18 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/19 17:18:58 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int ac, char **av)
 				return (-1);
 			get_tetriminos(fd, &info);
 			ft_relink_secondary(info.lst, nb_piece);
-			ft_mega_dlx(info.lst, 1, &p_sol, 2);
+			ft_mega_dlx(&info, &p_sol);
 			freeit(info.lst);
 			close(fd);
 		}

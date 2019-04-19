@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 13:10:36 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/19 17:30:15 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/19 03:13:50 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,21 +80,20 @@ static int	ft_uncover_header_row(t_qlist *h)
 	return (uncov);
 }
 
-int			ft_mega_dlx(t_fill_info *info, void (*p_sol)(t_fill_info *))
+int			ft_mega_dlx(t_qlist *h, int stopsol, void (*p_sol)(t_fifo *)
+						, int max_name)
 {
-	int	r;
-	int	max_name;
+	int		r;
 
-	max_name = info->max - info->min;
-	ft_cover_header_row(info->lst, max_name);
-	info->lst->name = 0;
-	while ((r = ft_dlx(info, 0, p_sol)) == 0)
+	ft_cover_header_row(h, max_name);
+	h->name = 0;
+	while ((r = ft_dlx(h, 0, stopsol, p_sol)) == 0 || !stopsol)
 	{
 		printf("test\n");
 		if (r == -1)
 			return (-1);
-		info->lst->name++;
-		if (!ft_uncover_header_row(info->lst))
+		h->name++;
+		if (!ft_uncover_header_row(h))
 			break ;
 	}
 	return (r);

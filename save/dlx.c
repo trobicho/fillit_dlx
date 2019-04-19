@@ -6,13 +6,12 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 01:23:01 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/19 17:30:09 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/19 15:23:27 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "qlist.h"
 #include "fifo.h"
-#include "fillit_init.h"
 #include <string.h>
 
 static void	ft_cover(t_qlist *c)
@@ -55,37 +54,38 @@ static void	ft_uncover(t_qlist *c)
 	c->l->r = c;
 }
 
-int			ft_dlx(t_fill_info *info, int k, void (*p_sol)(t_fill_info *))
+int			ft_dlx(t_qlist *h, int k, int stopsol, void (*p_sol)(t_fifo *))
 {
 	t_qlist			*col;
 	t_qlist			*row;
 	t_qlist			*col_j;
+	static t_fifo	*fifo = NULL;
 	int				r;
 
-	if (info->fifo == NULL && (info->fifo = ft_fifo_new(NULL, NULL)) == NULL)
+	if (fifo == NULL && (fifo = ft_fifo_new(NULL, NULL)) == NULL)
 		return (-1);
-	if (info->lst->r == info->lst)
+	if (h->r == h)
 	{
-		p_sol(info);
+		p_sol(fifo);
 		return (1);
 	}
-	col = info->lst->r;
+	col = h->r;
 	ft_cover(col);
 	row = col;
 	r = 0;
-	while (r == 0 && (row = row->d) != col)
+	while ((stopsol && r == 0) && (row = row->d) != col)
 	{
-		if (ft_fifo_push(info->fifo, row, k) == -1)
+		if (ft_fifo_push(fifo, row, k) == -1)
 			return (-1);
 		col_j = row;
 		while ((col_j = col_j->r) != row)
 			ft_cover(col_j->clh);
-		if ((r = ft_dlx(info, k + 1, p_sol)) == -1)
+		if ((r = ft_dlx(h, k + 1, stopsol, p_sol)) == -1)
 			return (r);
 		while ((col_j = col_j->l) != row)
 			ft_uncover(col_j->clh);
 	}
 	ft_uncover(col);
-	ft_fifo_push(info->fifo, NULL, k);
+	ft_fifo_push(fifo, NULL, k);
 	return (r);
 }

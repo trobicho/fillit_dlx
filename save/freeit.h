@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dlx.h                                              :+:      :+:    :+:   */
+/*   freeit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/11 01:23:03 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/19 17:18:16 by trobicho         ###   ########.fr       */
+/*   Created: 2019/04/19 02:52:42 by trobicho          #+#    #+#             */
+/*   Updated: 2019/04/19 02:56:50 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DLX_H
-# define DLX_H
-
+#ifndef FREEIT_H
+# define FREEIT_H
 #include "qlist.h"
-#include "fifo.h"
-#include "fillit_init.h"
 
-int	ft_dlx(t_fill_info *info, int k, void (*p_sol)(t_fill_info *));
+void	freeit(t_qlist *h);
 #endif

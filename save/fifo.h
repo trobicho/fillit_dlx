@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dlx.h                                              :+:      :+:    :+:   */
+/*   fifo.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/11 01:23:03 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/19 17:18:16 by trobicho         ###   ########.fr       */
+/*   Created: 2019/04/13 11:54:17 by trobicho          #+#    #+#             */
+/*   Updated: 2019/04/13 13:29:20 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DLX_H
-# define DLX_H
+#ifndef FIFO_H
+# define FIFO_H
 
 #include "qlist.h"
-#include "fifo.h"
-#include "fillit_init.h"
 
-int	ft_dlx(t_fill_info *info, int k, void (*p_sol)(t_fill_info *));
+typedef struct	s_fifo
+{
+	t_qlist			*lst;
+	struct s_fifo	*next;
+}				t_fifo;
+
+t_fifo	*ft_fifo_new(t_qlist *lst, t_fifo *next);
+int		ft_fifo_push(t_fifo *fifo, t_qlist *lst, int k);
 #endif

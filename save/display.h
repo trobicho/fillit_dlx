@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dlx.h                                              :+:      :+:    :+:   */
+/*   display.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/11 01:23:03 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/19 17:18:16 by trobicho         ###   ########.fr       */
+/*   Created: 2019/04/19 11:48:39 by trobicho          #+#    #+#             */
+/*   Updated: 2019/04/19 13:53:59 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DLX_H
-# define DLX_H
+#ifndef DISPLAY_H
+# define DISPLAY_H
 
-#include "qlist.h"
 #include "fifo.h"
-#include "fillit_init.h"
+#include "qlist.h"
 
-int	ft_dlx(t_fill_info *info, int k, void (*p_sol)(t_fill_info *));
+void	p_sol(t_fifo *fifo);
 #endif

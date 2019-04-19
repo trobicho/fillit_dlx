@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 22:08:28 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/19 17:13:04 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/19 14:46:01 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #define FILLIT_INIT_H
 
 #include "qlist.h"
-#include "fifo.h"
 
 typedef struct	s_fill_info
 {
@@ -22,7 +21,6 @@ typedef struct	s_fill_info
 	int		max;
 	int		nb_piece;
 	t_qlist	*lst;
-	t_fifo	*fifo;
 }				t_fill_info;
 
 typedef struct	s_point
