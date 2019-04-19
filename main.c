@@ -17,6 +17,7 @@
 #include "fillit_init.h"
 #include "freeit.h"
 #include "parser.h"
+#include "libft/libft.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -29,6 +30,8 @@ int	main(int ac, char **av)
 	int			nb_piece;
 	t_fill_info	info;
 
+	if (ac != 2)
+		ft_putendl_fd("usage: fillit file", 1);
 	if (ac == 2)
 	{
 		fd = open(av[1], O_RDONLY);
