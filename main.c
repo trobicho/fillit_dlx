@@ -32,7 +32,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		ft_putendl_fd("usage: fillit file", 1);
-	if (ac == 2)
+	else if (ac == 2)
 	{
 		fd = open(av[1], O_RDONLY);
 		if (fd > 2)
@@ -53,7 +53,10 @@ int	main(int ac, char **av)
 			close(fd);
 		}
 		else
+		{
+			ft_putendl_fd("error", 1);
 			return (-1);
+		}
 	}
 	return (0);
 }
