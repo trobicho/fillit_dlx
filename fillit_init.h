@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 22:08:28 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/19 20:47:54 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/19 21:27:40 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ typedef struct	s_curp
 {
 	int		i;
 	int		j;
+	int		k;
 	int		p;
+	int		col;
 	int		len;
 	t_point	size;
 }				t_curp;

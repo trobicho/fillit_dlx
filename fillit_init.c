@@ -6,7 +6,7 @@
 /*   By: trobicho <trobicho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 22:09:04 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/19 20:58:32 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/19 21:27:44 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ static t_point	size_center_piece(t_point *piece, int len)
 static t_qlist	*fillit_alloc_inter(t_fill_info *info, t_curp cp, t_qlist *row
 	, t_point *piece)
 {
-	int	k;
-	int	col;
 	int	min;
 
 	min = info->min;
@@ -89,21 +87,19 @@ static t_qlist	*fillit_alloc_inter(t_fill_info *info, t_curp cp, t_qlist *row
 		row[0].l = row;
 		row = &row[1];
 	}
-	k = 0;
 	ft_add_tocol(info->lst, &row[0], cp.p);
-	while (k < cp.len)
+	cp.k = -1;
+	while (++cp.k < cp.len)
 	{
-		col = info->nb_piece
-			+ info->max * (cp.i + piece[k].y) + cp.j + piece[k].x;
-		ft_add_tocol(info->lst, &row[k + 1], col);
-		row[k + 1].l = &row[k];
-		row[k].r = &row[k + 1];
-		k++;
+		cp.col = info->nb_piece
+			+ info->max * (cp.i + piece[cp.k].y) + cp.j + piece[cp.k].x;
+		ft_add_tocol(info->lst, &row[cp.k + 1], cp.col);
+		row[cp.k + 1].l = &row[cp.k];
+		row[cp.k].r = &row[cp.k + 1];
 	}
-	row[k].r = &row[0];
-	row[0].l = &row[k];
-	row = &row[cp.len + 1];
-	return (row);
+	row[cp.k].r = &row[0];
+	row[0].l = &row[cp.k];
+	return (&row[cp.len + 1]);
 }
 
 int				fillit_alloc_piece(t_fill_info *info, t_point *piece, int len
@@ -128,12 +124,9 @@ int				fillit_alloc_piece(t_fill_info *info, t_point *piece, int len
 	cp.len = len;
 	while (cp.i < info->max - cp.size.y)
 	{
-		cp.j = 0;
-		while (cp.j < info->max - cp.size.x)
-		{
+		cp.j = -1;
+		while (++cp.j < info->max - cp.size.x)
 			row = fillit_alloc_inter(info, cp, row, piece);
-			cp.j++;
-		}
 		cp.i++;
 	}
 	return (1);
