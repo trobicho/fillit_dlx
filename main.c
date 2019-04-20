@@ -6,7 +6,7 @@
 /*   By: trobicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 14:19:01 by trobicho          #+#    #+#             */
-/*   Updated: 2019/04/19 21:58:36 by trobicho         ###   ########.fr       */
+/*   Updated: 2019/04/20 17:37:25 by trobicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,13 @@ int			main(int ac, char **av)
 	else if (ac == 2)
 	{
 		fd = open(av[1], O_RDONLY);
-		if (fd > 2)
+		if (fd >= 0)
 			nb_piece = check_tetriminos(fd);
 		else
+		{
+			ft_putendl_fd("error", 1);
 			return (-1);
+		}
 		close(fd);
 		if (nb_piece)
 		{
